@@ -13,7 +13,7 @@
   function warn() {
     var t = document.getElementById("toast");
     if (t) {
-      t.textContent = "閒置過久，30 秒後將自動登出（移動滑鼠可繼續）";
+      t.textContent = (window.t ? window.t("idle.warn") : "閒置過久，30 秒後將自動登出（移動滑鼠可繼續）");
       t.className = "toast show err";
       setTimeout(function () { if (t) t.className = "toast"; }, 5000);
     }

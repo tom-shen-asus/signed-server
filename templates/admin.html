@@ -2,37 +2,38 @@
 {% block title %}Admin · NUC SW Team{% endblock %}
 {% block body %}
   <div class="topbar">
-    <span>用户 <b>{{ username }}</b> <span class="role-badge">ADMIN</span></span>
-    <a href="{{ url_for('portal.index') }}">回 Portal</a>
-    <a href="{{ url_for('auth.change_password') }}">改密碼</a>
-    <a href="{{ url_for('auth.logout') }}">登出</a>
+    <span><span data-i18n="label.user">用户</span> <b>{{ username }}</b> <span class="role-badge">ADMIN</span></span>
+    <a href="{{ url_for('portal.index') }}" data-i18n="nav.backportal">回 Portal</a>
+    <a href="{{ url_for('auth.change_password') }}" data-i18n="nav.changepw">改密碼</a>
+    <a href="{{ url_for('auth.logout') }}" data-i18n="nav.logout">登出</a>
   </div>
   <header>
     <img class="logo-mark" src="{{ url_for('static', filename='img/logo.png') }}" alt="NUC SW Team logo">
-    <h1>管理後台</h1>
-    <p>使用者管理與稽核紀錄</p>
+    <h1 data-i18n="admin.title">管理後台</h1>
+    <p data-i18n="admin.subtitle">使用者管理與稽核紀錄</p>
   </header>
 
   <div class="card">
-    <h2>新增使用者</h2>
+    <h2 data-i18n="admin.newUser">新增使用者</h2>
     <div class="row">
       <div style="flex:1;min-width:200px;">
-        <label class="fld">帳號</label>
+        <label class="fld" data-i18n="field.username">帳號</label>
         <input class="fld" type="text" id="newUser" placeholder="例如：alice">
       </div>
-      <button class="btn" id="createBtn">建立帳號</button>
+      <button class="btn" id="createBtn" data-i18n="admin.createBtn">建立帳號</button>
     </div>
     <div class="msg" id="createMsg"></div>
-    <p class="hint" style="margin-top:6px;">建立後會產生一次性臨時密碼（只顯示一次），交給本人，對方首次登入須改密碼。</p>
+    <p class="hint" style="margin-top:6px;" data-i18n="admin.newUserHint">建立後會產生一次性臨時密碼（只顯示一次），交給本人，對方首次登入須改密碼。</p>
   </div>
 
   <div class="card">
-    <h2 class="section-title"><span>使用者清單</span><button class="btn ghost small" id="reloadUsers">重新整理</button></h2>
+    <h2 class="section-title"><span data-i18n="admin.usersList">使用者清單</span><button class="btn ghost small" id="reloadUsers" data-i18n="btn.refresh">重新整理</button></h2>
     <div id="usersTable"></div>
   </div>
 
   <div class="card">
-    <h2 class="section-title"><span>稽核紀錄（最近 200 筆）</span><button class="btn ghost small" id="reloadAudit">重新整理</button></h2>
+    <h2 class="section-title"><span data-i18n="admin.auditTitle">稽核紀錄（最近 200 筆）</span><button class="btn ghost small" id="reloadAudit" data-i18n="btn.refresh">重新整理</button></h2>
+    <input class="search" id="auditSearch" data-i18n-ph="admin.auditSearchPh" placeholder="搜尋稽核…">
     <div id="auditTable"></div>
   </div>
   <footer>NUC SW Team · Admin</footer>
