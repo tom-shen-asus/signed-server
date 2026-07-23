@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets / runtime — NEVER commit
+secret_key.txt
+signserver.db
+logs/
+*.pem
+cert.pem
+key.pem
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

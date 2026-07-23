@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}NUC SW Team · Portal{% endblock %}
+{% block body %}
+  <div class="topbar">
+    <span>用户 <b>{{ username }}</b>
+      {% if is_admin %}<span class="role-badge">ADMIN</span>{% endif %}
+    </span>
+    {% if is_admin %}<a href="{{ url_for('admin.admin_page') }}">管理後台</a>{% endif %}
+    <a href="{{ url_for('auth.change_password') }}">改密碼</a>
+    <a href="{{ url_for('auth.logout') }}">登出</a>
+  </div>
+
+  <header>
+    <img class="logo-mark" src="{{ url_for('static', filename='img/logo.png') }}" alt="NUC SW Team logo">
+    <div class="team-pill"><span class="dot"></span>NUC SW TEAM · INTERNAL SERVICE</div>
+    <h1>Code Signing Portal</h1>
+    <p>Windows 應用程式數位簽章服務 — 上傳待簽檔案，簽署完成後即可下載。</p>
+  </header>
+
+  <div class="card">
+    <h2>上傳待簽章檔案</h2>
+    <div class="dropzone" id="dropzone">
+      <div class="big">⬆️</div>
+      <div>拖曳檔案到這裡，或 <b>點擊選擇檔案</b></div>
+      <div class="hint">支援 .exe / .dll / .msi / .ps1（可一次選多個）</div>
+    </div>
+    <input type="file" id="fileInput" multiple accept=".exe,.dll,.msi,.ps1">
+    <div id="selected"></div>
+    <div class="progress" id="progress"><div></div></div>
+    <button class="btn" id="uploadBtn" style="display:none;">開始上傳</button>
+  </div>
+
+  <div class="toolbar">
+    {% if is_admin %}
+    <label class="filter-toggle"><input type="checkbox" id="onlyMine"> 只顯示我上傳的檔案</label>
+    {% else %}<span></span>{% endif %}
+    <button class="btn ghost small" id="refreshBtn">重新整理</button>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title"><span>待簽章 <span class="badge wait">Waiting</span></span><span class="count" id="waitCount"></span></h2>
+    <div id="waitTable"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title"><span>已簽章 <span class="badge done">Signed</span></span><span class="count" id="doneCount"></span></h2>
+    <div id="doneTable"></div>
+    <p class="hint" style="margin-top:14px;">下載完成後，請按刪除移除自己的檔案，保持清單乾淨。</p>
+  </div>
+  <footer>NUC SW Team · Code Signing Portal · Internal use only</footer>
+{% endblock %}
+{% block scripts %}
+<script>const CURRENT_USER = {{ username|tojson }}; const IS_ADMIN = {{ is_admin|tojson }}; window.IDLE_MS = {{ idle_ms }};</script>
+<script src="{{ url_for('static', filename='js/portal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/idle.js') }}"></script>
+{% endblock %}

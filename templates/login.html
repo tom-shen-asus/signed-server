@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}NUC SW Team · 登入{% endblock %}
+{% block body %}
+<div class="center-box">
+  <div class="card">
+    <header style="margin-bottom:14px;">
+      <img class="logo-mark" src="{{ url_for('static', filename='img/logo.png') }}" alt="NUC SW Team logo">
+      <h1 style="font-size:20px;">NUC SW Team</h1>
+      <p>Code Signing Portal 登入</p>
+    </header>
+    <form method="POST" action="{{ url_for('auth.login') }}">
+      <input type="hidden" name="next" value="{{ next }}">
+      <label class="fld">帳號</label>
+      <input class="fld" type="text" name="username" required autofocus>
+      <label class="fld">密碼</label>
+      <input class="fld" type="password" name="password" required>
+      <button class="btn" style="width:100%;margin-top:20px;justify-content:center;" type="submit">登入</button>
+    </form>
+    <div class="msg {{ msg_cls }}">{{ msg }}</div>
+  </div>
+</div>
+{% endblock %}
